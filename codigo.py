@@ -321,7 +321,7 @@ while rodando:
     if tela_inicial:
         tela.fill(fundo)
 
-        sup_titulo = fonte_game.render("JOGO DA COBRINHA :D", True, texto)
+        sup_titulo = fonte_game.render("JOGO DA COBRINHA :D", True, texto) #tela de início
         sup_iniciar = fonte_game.render("Pressione qualquer tecla para iniciar", True, texto)
 
         tela.blit(sup_titulo, sup_titulo.get_rect(center=(largura // 2, altura // 2 - 40)))
@@ -366,7 +366,7 @@ while rodando:
     texto_fase = f"FASE: {fase_atual}" if fase_atual < 3 else "FASE: FINAL (3)"
 
     if vidas <= 0:
-        sup_game_over = fonte_game.render("GAME OVER! :(", True, bomba)
+        sup_game_over = fonte_game.render("GAME OVER! :(", True, bomba) #tela de game over
         sup_pontuacao_final = fonte_game.render(f"Sua pontuação foi: {pontuacao}", True, bomba)
         sup_reiniciar = fonte_game.render("Pressione R para reiniciar", True, bomba)
 
