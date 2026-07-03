@@ -1,5 +1,5 @@
 # Jogo-da-Cobrinha
-trabalho algoritmos e programação
+Trabalho de Algoritmos e Programação
 de Elisa Diefenthäler Jost
 
 git clone https://github.com/elisadjost2008-dotcom/Jogo-da-Cobrinha.git
