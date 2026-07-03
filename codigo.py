@@ -89,7 +89,7 @@ for chave, arquivo in arquivo_sprites.items():
         img = pygame.image.load(caminho).convert_alpha()
         sprites[chave] = pygame.transform.scale(img, (tamanho_personagem, tamanho_personagem))
     except (FileNotFoundError, pygame.error):
-        print(f"[AVISO] Falha ao carregar '{caminho}'. Fallback geométrico ativado para {chave}.")
+        print(f"[AVISO] Falha ao carregar '{caminho}'. Fallback geométrico ativado para {chave}.") #caso sprites não sejam encontrados
         usar_sprites = False
 
 #Sons
@@ -103,7 +103,7 @@ try:
     som_morte = pygame.mixer.Sound(caminho_som)
     print("[INFO] Efeito sonoro 'morreu.mp3' carregado com sucesso!")
 except (FileNotFoundError, pygame.error):
-    print(f"[AVISO] Arquivo de som 'morreu.mp3' não encontrado. O jogo rodará em modo silencioso.")
+    print(f"[AVISO] Arquivo de som 'morreu.mp3' não encontrado. O jogo rodará em modo silencioso.") #caso som não seja encontrado
 
 som_bomba = None
 pasta_sons = "sons"
@@ -114,7 +114,7 @@ try:
     som_bomba = pygame.mixer.Sound(caminho_som)
     print("[INFO] Efeito sonoro 'morte_bomba.mp3' carregado com sucesso!")
 except (FileNotFoundError, pygame.error):
-    print(f"[AVISO] Arquivo de som 'morte_bomba.mp3' não encontrado. O jogo rodará em modo silencioso.")
+    print(f"[AVISO] Arquivo de som 'morte_bomba.mp3' não encontrado. O jogo rodará em modo silencioso.") #caso som não seja encontrado
 
 som_comida = None
 pasta_sons = "sons"
@@ -125,7 +125,7 @@ try:
     som_comida = pygame.mixer.Sound(caminho_som)
     print("[INFO] Efeito sonoro 'comendo.mp3' carregado com sucesso!")
 except (FileNotFoundError, pygame.error):
-    print(f"[AVISO] Arquivo de som 'comendo.mp3' não encontrado. O jogo rodará em modo silencioso.")
+    print(f"[AVISO] Arquivo de som 'comendo.mp3' não encontrado. O jogo rodará em modo silencioso.") #caso som não seja encontrado
 
 som_nova_fase = None
 pasta_sons = "sons"
@@ -136,7 +136,7 @@ try:
     som_nova_fase = pygame.mixer.Sound(caminho_som)
     print("[INFO] Efeito sonoro 'ebaa.mp3' carregado com sucesso!")
 except (FileNotFoundError, pygame.error):
-    print(f"[AVISO] Arquivo de som 'ebaa.mp3' não encontrado. O jogo rodará em modo silencioso.")
+    print(f"[AVISO] Arquivo de som 'ebaa.mp3' não encontrado. O jogo rodará em modo silencioso.") #caso som não seja encontrado
 
 #Gerenciando itens que serão gerados
 momento_geracao = 0
@@ -162,17 +162,17 @@ def spawnar_itens():
     chance_bomba = fases[fase_atual]["chance_bomba"]
 
     if random.random() < chance_bomba:
-        pos_bomba = gerar_posicao_aleatoria()
+        pos_bomba = gerar_posicao_aleatoria() #posição aleatória das bombas
         bomba_ativa = True
         if random.random() < 0.50:
-            pos_fruta = gerar_posicao_aleatoria()
+            pos_fruta = gerar_posicao_aleatoria() #posição aleatória das frutas
             tipo_fruta = random.choice(["vermelha", "verde"])
         else:
             pos_fruta = None
             tipo_fruta = None
     else:
         pos_fruta = gerar_posicao_aleatoria()
-        tipo_fruta = random.choice(["vermelha", "verde"])
+        tipo_fruta = random.choice(["vermelha", "verde"]) #frutas podem ser vermelhas ou verdes
         pos_bomba = None
         bomba_ativa = False
 
@@ -245,16 +245,16 @@ while rodando:
                 continue
 
             #Setinhas e WASD para locomoção da cobrinha
-            if evento.key in [pygame.K_LEFT, pygame.K_a] and dir_x == 0:
+            if evento.key in [pygame.K_LEFT, pygame.K_a] and dir_x == 0: #ir para esquerda
                 dir_x = -velocidade;
                 dir_y = 0
-            elif evento.key in [pygame.K_RIGHT, pygame.K_d] and dir_x == 0:
+            elif evento.key in [pygame.K_RIGHT, pygame.K_d] and dir_x == 0: #ir para direita
                 dir_x = velocidade;
                 dir_y = 0
-            elif evento.key in [pygame.K_UP, pygame.K_w] and dir_y == 0:
+            elif evento.key in [pygame.K_UP, pygame.K_w] and dir_y == 0: #ir para cima
                 dir_x = 0;
                 dir_y = -velocidade
-            elif evento.key in [pygame.K_DOWN, pygame.K_s] and dir_y == 0:
+            elif evento.key in [pygame.K_DOWN, pygame.K_s] and dir_y == 0: #ir para baixo
                 dir_x = 0;
                 dir_y = velocidade
 
@@ -335,14 +335,14 @@ while rodando:
         if usar_sprites:
             sprite_maca = sprites["maçã vermelha"] if tipo_fruta == "vermelha" else sprites["maçã verde"]
             tela.blit(sprite_maca, pos_fruta)
-        else:
+        else: 
             pygame.draw.rect(tela, maca,
                              (pos_fruta[0] + 5, pos_fruta[1] + 5, tamanho_personagem - 10, tamanho_personagem - 10))
 
     if bomba_ativa and pos_bomba:
         if usar_sprites:
             tela.blit(sprites["bomba"], pos_bomba)
-        else:
+        else: 
             pygame.draw.rect(tela, bomba,
                              (pos_bomba[0] + 5, pos_bomba[1] + 5, tamanho_personagem - 10, tamanho_personagem - 10))
 
@@ -351,7 +351,7 @@ while rodando:
             if usar_sprites:
                 sprite_cabeca = sprites["cabeça"] if vidas > 0 else sprites["morta"]
                 tela.blit(sprite_cabeca, (parte[0], parte[1]))
-            else:
+            else: 
                 cor_cabeca_atual = cabeca if vidas > 0 else (106, 192, 76)
                 pygame.draw.rect(tela, cor_cabeca_atual, (parte[0], parte[1], tamanho_personagem, tamanho_personagem))
         else:
@@ -361,9 +361,9 @@ while rodando:
                 pygame.draw.rect(tela, corpo, (parte[0] + 2, parte[1] + 2, tamanho_personagem - 4, tamanho_personagem - 4))
 
 #Placar das informações
-    texto_pontuacao = f"PONTUAÇÃO: {pontuacao}"
-    texto_vidas = f"VIDAS: {vidas}"
-    texto_fase = f"FASE: {fase_atual}" if fase_atual < 3 else "FASE: FINAL (3)"
+    texto_pontuacao = f"PONTUAÇÃO: {pontuacao}" #pontuação
+    texto_vidas = f"VIDAS: {vidas}" #vidas
+    texto_fase = f"FASE: {fase_atual}" if fase_atual < 3 else "FASE: FINAL (3)" #fases
 
     if vidas <= 0:
         sup_game_over = fonte_game.render("GAME OVER! :(", True, bomba) #tela de game over
@@ -374,7 +374,7 @@ while rodando:
         tela.blit(sup_pontuacao_final, sup_pontuacao_final.get_rect(center=(largura // 2, altura // 2)))
         tela.blit(sup_reiniciar, sup_reiniciar.get_rect(center=(largura // 2, altura // 2 + 40)))
 
-    sup_pontuacao = fonte_game.render(texto_pontuacao, True, texto)
+    sup_pontuacao = fonte_game.render(texto_pontuacao, True, texto) 
     sup_vidas = fonte_game.render(texto_vidas, True, texto)
     sup_fase = fonte_game.render(texto_fase, True, texto)
 
